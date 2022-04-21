@@ -126,7 +126,7 @@ jobs:
         
     - name: Generate Manifest File
       run: |
-        cat << 123 > manifest.yml
+        cat << mimi > manifest.yml
         applications:
         - name: ${IBM_CF_APP_NAME}
           memory: ${IBM_CF_APP_MEM}
@@ -134,6 +134,6 @@ jobs:
           command: base64 -d config > config.json; ./${IBM_CF_APP_NAME} -config=config.json
           buildpacks:
           - binary_buildpack
-        
+        mimi
     - name: Deploy Cloud Foundry App
       run: cf push
