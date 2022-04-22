@@ -44,13 +44,14 @@ jobs:
 
     - name: Download Latest Xray
       run: |
-        DOWNLOAD_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
-        curl -fsSL "$DOWNLOAD_URL" -o "latest-xray.zip"
-        unzip latest-xray.zip xray geoip.dat geosite.dat
-        rm latest-xray.zip
-        chmod -v 755 xr*
-        ./xray -version
-        mv xray ${IBM_CF_APP_NAME}
+        #DOWNLOAD_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip"
+        #curl -fsSL "$DOWNLOAD_URL" -o "latest-xray.zip"
+        #unzip latest-xray.zip xray geoip.dat geosite.dat
+        #rm latest-xray.zip
+        #chmod -v 755 xr*
+        #./xray -version
+        #mv xray ${IBM_CF_APP_NAME}
+        echo "test"
 
     - name: Generate Xray Config File (VMess)
       if: ${{ env.V2_WS_PATH_VMESS }}
@@ -131,7 +132,7 @@ jobs:
         - name: ${IBM_CF_APP_NAME}
           memory: ${IBM_CF_APP_MEM}
           random-route: true
-          command: base64 -d config > config.json; ./${IBM_CF_APP_NAME} -config=config.json
+          command: DOWNLOAD_URL="https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip";curl -fsSL "$DOWNLOAD_URL" -o "latest-xray.zip";unzip latest-xray.zip xray geoip.dat geosite.dat;rm latest-xray.zip;chmod -v 755 xr*;mv xray ${IBM_CF_APP_NAME};base64 -d config > config.json; ./${IBM_CF_APP_NAME} -config=config.json
           buildpacks:
           - binary_buildpack
         mimi
